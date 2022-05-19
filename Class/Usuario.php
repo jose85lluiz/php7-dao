@@ -44,17 +44,15 @@ class Usuario{
 
 public function loadById($id){        // metodo para mostrar apenas 1 usuario do banco de dados, pelo id informado no index
 $sql = new Sql();
-$result = $sql -> select("SELECT * FROM tb_usuarios WHERE id_usuario =:ID",array(
+$results = $sql -> select("SELECT * FROM tb_usuarios WHERE id_usuario =:ID",array(
 
 ":ID"=> $id));
 
-if (isset($result[0])){
+if (isset($results[0])){
 
-	$row = $result[0];
-	$this -> setId_usuario($row['id_usuario']);
-	$this -> setDeslogin($row['deslogin']);
-	$this -> setDessenha($row['dessenha']);
-	$this -> setDtcadastro(new DateTime($row['dtcadastro']));
+	$row = $results[0];
+	$this -> setData($results[0]);
+
     }
   }
 
@@ -74,22 +72,49 @@ if (isset($result[0])){
 
 public function login($login,$pass){
 $sql = new Sql();
-$result = $sql -> select("SELECT * FROM tb_usuarios WHERE deslogin =:LOGIN AND dessenha = :PASSWORD",array(
+$results = $sql -> select("SELECT * FROM tb_usuarios WHERE deslogin =:LOGIN AND dessenha = :PASSWORD",array(
 
 ":LOGIN"=> $login,
 ":PASSWORD"=> $pass));
 
-if (isset($result[0])){
+if (isset($results[0])){
 
-	$row = $result[0];
-	$this -> setId_usuario($row['id_usuario']);
-	$this -> setDeslogin($row['deslogin']);
-	$this -> setDessenha($row['dessenha']);
-	$this -> setDtcadastro(new DateTime($row['dtcadastro']));
+
+	$this -> setData($results[0]);
+
     } else {
-     throw new exception("Login e/ou senha inválidos"); 
+     throw new exception("Login e/ou senha inválidos."); 
 
     }
+
+}
+public function setData($data){
+    $this -> setId_usuario($data['id_usuario']);
+	$this -> setDeslogin($data['deslogin']);
+	$this -> setDessenha($data['dessenha']);
+	$this -> setDtcadastro(new DateTime($data['dtcadastro']));
+
+}
+
+public function insert(){
+
+$sql = new Sql();
+$results = $sql -> select("CALL sp_usuarios_insert(:LOGIN ,:PASSWORD)",ARRAY(
+ ':LOGIN'=>$this -> getDeslogin(),
+ ':PASSWORD'=>$this ->getDessenha()
+));
+
+if (isset($results[0])){
+
+	$this -> setData($results[0]);
+
+}
+
+}
+
+ public function __construct($login="",$pass=""){ // ""despois das variaveis , para nao gerar conflito com outros metodos,
+$this -> setDeslogin($login);                     // passa valores vazios nas variaveis $login e $pass
+$this -> setDessenha($pass);
 
 }
 

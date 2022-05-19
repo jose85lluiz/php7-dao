@@ -22,6 +22,15 @@ echo "</br>";
 echo "SE LOGIN E SENHA FOREM VALIDAS:</br>";
 $user = new Usuario();
 $user -> login ("josluiz","774433");
-
 echo $user;
+echo "</br>";
+echo "-------------------------------------------------------------------------------------------------------------------------------</br>";
+echo "INSERINDO DADOS NO BANCO DE DADOS :</br>";
+echo "inserindo Login e senha, e recebendo informçao de id e data atraves de procedure no bando de dados :</br>";
+$aluno = new Usuario("aluno44", "@332211"); // criado metodo construtor para usar set's login e senha, 
+//$aluno -> setDeslogin("aluno"); // sem o metodo construtor
+//$aluno -> setDessenha("@12345");// sem o metodo cosntrutor
+$aluno -> insert();
+
+echo $aluno;
 ?>
