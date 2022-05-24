@@ -69,6 +69,7 @@ if (isset($results[0])){
      ));
 
   }
+  
 
   public function update ($login, $pass){
 
@@ -97,6 +98,7 @@ if (isset($results[0])){
  $this ->setDeslogin("");
  $this ->setDessenha("");
  $this ->setDtcadastro(new DateTime);
+
   } 
 
 public function login($login,$pass){
