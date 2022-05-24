@@ -69,7 +69,7 @@ if (isset($results[0])){
      ));
 
   }
-  
+
 
   public function update ($login, $pass){
 
@@ -84,6 +84,7 @@ if (isset($results[0])){
        ':ID'=>$this -> getId_usuario()
       ));
 
+ 
   }
 
   public function delete(){
