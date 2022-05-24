@@ -108,8 +108,7 @@ $results = $sql -> select("SELECT * FROM tb_usuarios WHERE deslogin =:LOGIN AND 
 
 if (isset($results[0])){
 
-
-	$this -> setData($results[0]);
+   $this -> setData($results[0]);
 
     } else {
      throw new exception("Login e/ou senha inválidos."); 
