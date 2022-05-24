@@ -21,7 +21,7 @@ echo "</br>";
 
 echo "SE LOGIN E SENHA FOREM VALIDAS:</br>";
 $user = new Usuario();
-$user -> login ("josluiz","774433");
+$user -> login ("aluno","@12345");
 echo $user;
 echo "</br>";
 echo "-------------------------------------------------------------------------------------------------------------------------------</br>";
@@ -31,6 +31,25 @@ $aluno = new Usuario("aluno44", "@332211"); // criado metodo construtor para usa
 //$aluno -> setDeslogin("aluno"); // sem o metodo construtor
 //$aluno -> setDessenha("@12345");// sem o metodo cosntrutor
 $aluno -> insert();
-
 echo $aluno;
+echo "-------------------------------------------------------------------------------------------------------------------------------</br>";
+echo "ALTERANDO DADOS USANDO METODO UPDATE :</br>";
+$usuario = new Usuario();
+$usuario -> loadById(1);
+$usuario -> update("PROFESSOR","1234567");
+echo $usuario;
+echo "-------------------------------------------------------------------------------------------------------------------------------</br>";
+echo "DELETANDO DADOS USANDO METODO DELETE :</br>";
+$id= 3;
+$user = new Usuario();
+$user ->loadById($id);
+$user ->delete();
+echo "Id apagado :".$id;
+echo $user;
+
+
+
+
+
+
 ?>

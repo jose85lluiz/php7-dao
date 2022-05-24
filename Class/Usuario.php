@@ -70,6 +70,35 @@ if (isset($results[0])){
 
   }
 
+  public function update ($login, $pass){
+
+  	$this -> setDeslogin($login);
+  	$this -> setDessenha($pass);
+
+      $sql = new Sql();
+
+      $sql -> query("UPDATE tb_usuarios SET deslogin=:LOGIN, dessenha=:PASS WHERE id_usuario=:ID", array(
+      ':LOGIN'=>$this -> getDeslogin(),
+      ':PASS'=>$this -> getDessenha(),
+       ':ID'=>$this -> getId_usuario()
+      ));
+
+  }
+
+  public function delete(){
+
+   $sql = new Sql();
+   $sql -> query("DELETE FROM tb_usuarios WHERE id_usuario=:ID",array(
+':ID'=> $this -> getId_usuario()
+   
+   ));
+
+ $this ->setId_usuario(0);
+ $this ->setDeslogin("");
+ $this ->setDessenha("");
+ $this ->setDtcadastro(new DateTime);
+  } 
+
 public function login($login,$pass){
 $sql = new Sql();
 $results = $sql -> select("SELECT * FROM tb_usuarios WHERE deslogin =:LOGIN AND dessenha = :PASSWORD",array(
